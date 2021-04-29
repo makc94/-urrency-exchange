@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+export default function App() {
+  const [ukr, setUkr] = useState("");
+  const [dol, setDol] = useState("");
+
+  const toDollar = (e) => {
+    const cur = e.target.value;
+    setUkr(cur);
+    setDol(cur / 27.8);
+  };
+
+  const toGrivna = (e) => {
+    const cur = e.target.value;
+    setDol(cur);
+    setUkr(cur * 26.8);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <form>
+        <label>
+          <span>Grivna: </span>
+          <input type="text" value={ukr} onChange={toDollar} />
+        </label>
+        <label>
+          <span>Dollar: </span>
+          <input type="text" value={dol} onChange={toGrivna} />
+        </label>
+      </form>
     </div>
   );
 }
-
-export default App;
